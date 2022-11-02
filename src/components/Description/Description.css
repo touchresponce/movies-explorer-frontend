@@ -1,0 +1,15 @@
+.description {
+  border-bottom: 1px solid #dadada;
+  height: 51px;
+}
+
+.description__text {
+  padding-bottom: 23px;
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}

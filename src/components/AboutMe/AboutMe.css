@@ -1,0 +1,6 @@
+.about {
+  padding: 110px 70px 125px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1140px;
+}

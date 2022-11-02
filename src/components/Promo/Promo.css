@@ -1,0 +1,47 @@
+.promo {
+  background-color: #073042;
+  display: flex;
+  flex-direction: column;
+  padding: 75px 70px;
+}
+
+.promo__container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 84px;
+}
+
+.promo__title {
+  padding: 0;
+  margin: 0;
+  max-width: 640px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  margin-bottom: 36px;
+}
+
+.promo__subtitle {
+  max-width: 310px;
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.promo__button {
+  color: inherit;
+  width: 129px;
+  height: 36px;
+  padding: 10px 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  border: 1px solid #ffffff;
+  border-radius: 3px;
+  background-color: transparent;
+}

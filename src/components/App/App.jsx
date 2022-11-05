@@ -3,29 +3,31 @@ import { useState } from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import { Routes, Route } from "react-router-dom";
+import Footer from "../Footer/Footer";
+import NotFound from "../NotFound/NotFound";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   return (
     <div className="page">
-      <Header isLogin={isLogin} setIsLogin={setIsLogin} />
+      {/* <Header isLogin={isLogin} setIsLogin={setIsLogin} /> */}
       <Routes>
+        {/* защита */}
+        <Route path="/signin" />
+        <Route path="signup" />
+        {/* защита */}
+        {/* общий компонент шапка подвал */}
         <Route path="/" element={<Main isLogin={isLogin} />} />
-        {/* в каждый роут должен быть мэйн */}
+        {/* общий компонент шапка подвал */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      {/* здесь футер */}
+      {/* <Footer /> */}
     </div>
   );
 }
 
 export default App;
-
-// по роуту / отображается страница «О проекте»;
-// по роуту /movies отображается страница «Фильмы»;
-// по роуту /saved-movies отображается страница «Сохранённые фильмы»;
-// по роуту /profile отображается страница с профилем пользователя;
-// по роутам /signin и /signup отображаются страницы авторизации и регистрации.
 
 // нажатие на логотип ведёт на страницу «О проекте»;
 // нажатие на «Фильмы» — на роут /movies;
@@ -45,3 +47,6 @@ export default App;
 //       защита
 //   </Routes>
 // </div>
+
+// шрифты + проверить жирность
+// проверить все картинки на наличие необходимых свойств css

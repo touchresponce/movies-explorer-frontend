@@ -23,6 +23,16 @@ export default function AboutProject() {
           </p>
         </article>
       </div>
+      <div className="project__container">
+        <div className="project__backend">
+          <h4 className="project__backend-title">1 неделя</h4>
+          <p className="project__backend-subtitle">Back-end</p>
+        </div>
+        <div className="project__frontend">
+          <h4 className="project__frontend-title">4 недели</h4>
+          <p className="project__frontend-subtitle">Front-end</p>
+        </div>
+      </div>
     </section>
   );
 }

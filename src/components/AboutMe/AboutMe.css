@@ -4,3 +4,52 @@
   flex-direction: column;
   max-width: 1140px;
 }
+
+.about__wrapper {
+  margin-top: 66px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.about__wrapper-text {
+  max-width: 600px;
+}
+
+.about__title {
+  padding: 0;
+  margin: 0 0 16px;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+}
+
+.about__subtitle {
+  padding: 0;
+  margin: 0 0 26px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.about__text {
+  padding: 0;
+  margin: 0 0 99px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.about__link {
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.about__image {
+  width: 270px;
+  height: 327px;
+}

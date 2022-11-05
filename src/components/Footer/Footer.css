@@ -1,0 +1,40 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 70px;
+}
+
+.footer__description {
+  padding: 0 0 20px;
+  margin: 0;
+  border-bottom: 1px solid #424242;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.footer__container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.footer__year {
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.footer__list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}

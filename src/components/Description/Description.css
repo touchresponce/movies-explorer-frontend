@@ -1,13 +1,7 @@
 .description {
   border-bottom: 1px solid #dadada;
-  height: 51px;
-}
-
-.description__text {
-  padding-bottom: 23px;
-  padding: 0;
   margin: 0;
-  font-style: normal;
+  padding-bottom: 23px;
   font-weight: 400;
   font-size: 22px;
   line-height: 27px;

@@ -4,7 +4,6 @@ import Navigation from "../Navigation/Navigation";
 
 export default function Header({ isLogin, setIsLogin }) {
   return (
-    // <header className="header">
     <header className={`header ${!isLogin ? "header-color" : ""}`}>
       <Link
         to="/"

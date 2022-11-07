@@ -17,4 +17,9 @@
   background-repeat: no-repeat;
   object-position: center;
   object-fit: cover;
+  transition: all 0.3s ease-in-out;
+}
+
+.header__image:hover {
+  scale: 1.1;
 }

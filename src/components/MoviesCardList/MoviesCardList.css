@@ -1,0 +1,16 @@
+.movies {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(300px, 364px));
+  margin: 0 auto;
+  justify-content: center;
+  /* max-width: 1140px; */
+  column-gap: 20px;
+  row-gap: 30px;
+  padding: 0 70px;
+}
+
+@media screen and (max-width: 1080px) {
+  .movies {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+}

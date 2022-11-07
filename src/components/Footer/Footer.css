@@ -1,5 +1,5 @@
 .footer {
-  margin: 0 auto;
+  margin: 79px auto 0;
   padding: 0 70px;
   max-width: 1140px;
 }
@@ -7,6 +7,7 @@
 .footer__description {
   padding: 0 0 20px;
   margin: 0;
+  color: #8B8B8B;
   border-bottom: 1px solid #424242;
   font-weight: 400;
   font-size: 13px;
@@ -37,4 +38,9 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
+}
+
+.footer__link {
+  color: #fff;
+  text-decoration: none;
 }

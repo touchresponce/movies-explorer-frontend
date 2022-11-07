@@ -10,10 +10,10 @@ export default function Footer() {
         <p className="footer__year">&copy; 2022</p>
         <ul className="footer__list">
           <li>
-            <a>Яндекс.Практикум</a>
+            <a className="footer__link" href="https://practicum.yandex.ru" target='_blank' rel="noreferrer">Яндекс.Практикум</a>
           </li>
           <li>
-            <a>Github</a>
+            <a className="footer__link" href="https://github.com" target='_blank' rel="noreferrer">Github</a>
           </li>
         </ul>
       </div>

@@ -1,6 +1,11 @@
 .search {
-  margin: 70px 0;
+  margin: 70px 0 80px;
   padding: 0 70px;
+}
+
+.search__form {
+  border-bottom: 1px solid #424242;
+  padding-bottom: 54px;
 }
 
 .search__wrapper {

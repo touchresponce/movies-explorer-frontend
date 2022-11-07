@@ -22,9 +22,9 @@ export default function Navigation({ isLogin }) {
           </div>
           <div>
             <Link
-              to={"/account"}
               className="navigation__link navigation__link_type_profile"
-            >
+              to="/profile"
+              >
               Аккаунт
               <div className="navigation__icon" />
             </Link>

@@ -1,0 +1,58 @@
+.movie {
+  background-color: #222222;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie__title {
+  padding: 0;
+  margin: 14px 0 0 14px;
+  max-width: 280px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie__duration {
+  padding: 0;
+  margin: 9px 0 14px 14px;
+  max-width: 280px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #8b8b8b;
+}
+
+.movie__image {
+  width: 100%;
+}
+
+.movie__button {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 19px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  object-position: center;
+  object-fit: cover;
+}
+
+.movie__button_type_save {
+  background-image: url("../../images/save.svg");
+}
+
+.movie__button_type_unsave {
+  background-image: url("../../images/unsave.svg");
+}

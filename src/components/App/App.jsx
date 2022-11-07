@@ -5,6 +5,8 @@ import { Routes, Route } from "react-router-dom";
 import NotFound from "../NotFound/NotFound";
 import Layout from "../Layout/Laout";
 import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
 
 export default function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,8 +23,8 @@ export default function App() {
           {/* защита */}
           <Route index element={<Main isLogin={isLogin} />} />
           <Route path="/movies" element={<Movies />} />
-          {/* тут настройки профиля */}
-          {/* сохраненки */}
+          <Route path="/saved-movies" element={< SavedMovies/>} />
+          <Route path="/profile" element={<Profile />} />
           {/* защита */}
         </Route>
         <Route path="*" element={<NotFound />} />

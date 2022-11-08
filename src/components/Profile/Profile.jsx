@@ -1,6 +1,9 @@
 import "./Profile.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  const navigate = useNavigate();
+
   return (
     <section className="profile">
       <h1 className="profile__title">Привет, Виталий!</h1>
@@ -38,7 +41,7 @@ export default function Profile() {
         <button className="profile__edit" to="">
           Редактировать
         </button>
-        <button className="profile__logout" to="/">
+        <button className="profile__logout" onClick={() => navigate("/")}>
           Выйти из аккаунта
         </button>
       </form>

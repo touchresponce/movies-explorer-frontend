@@ -1,10 +1,12 @@
 import "./Navigation.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-export default function Navigation({ isLogin }) {
+export default function Navigation() {
+  const location = useLocation();
+
   return (
     <>
-      {isLogin ? (
+      {location.pathname !== "/" ? (
         <nav className="navigation logged">
           <div>
             <Link
@@ -24,7 +26,7 @@ export default function Navigation({ isLogin }) {
             <Link
               className="navigation__link navigation__link_type_profile"
               to="/profile"
-              >
+            >
               Аккаунт
               <div className="navigation__icon" />
             </Link>

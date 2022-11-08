@@ -1,29 +1,26 @@
 import "./App.css";
-import { useState } from "react";
-import Main from "../Main/Main";
 import { Routes, Route } from "react-router-dom";
+import Main from "../Main/Main";
 import NotFound from "../NotFound/NotFound";
 import Layout from "../Layout/Laout";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 
 export default function App() {
-  const [isLogin, setIsLogin] = useState(true);
-
   return (
     <div className="page">
       <Routes>
-        <Route path="/signin" />
-        <Route path="signup" />
-        <Route
-          path="/"
-          element={<Layout isLogin={isLogin} setIsLogin={setIsLogin} />}
-        >
+        <Route path="/signin" element={<Login />} />
+        <Route path="signup" element={<Register />} />
+        {/* общая верстка - шапка, подвал */}
+        <Route path="/" element={<Layout />}>
           {/* защита */}
-          <Route index element={<Main isLogin={isLogin} />} />
+          <Route index element={<Main />} />
           <Route path="/movies" element={<Movies />} />
-          <Route path="/saved-movies" element={< SavedMovies/>} />
+          <Route path="/saved-movies" element={<SavedMovies />} />
           <Route path="/profile" element={<Profile />} />
           {/* защита */}
         </Route>
@@ -33,14 +30,10 @@ export default function App() {
   );
 }
 
-// нажатие на логотип ведёт на страницу «О проекте»;
-// нажатие на «Фильмы» — на роут /movies;
-// нажатие на «Сохранённые фильмы» — на роут /saved-movies;
-// нажатие на «Регистрация», «Авторизация», «Аккаунт» — на соответствующие роуты /signup, /signin и /profile.
-
 // шрифты + проверить жирность
 // проверить все картинки на наличие необходимых свойств css
 
-// все ссылки должны быть cursor pointer
+// все ссылки должны быть cursor pointer + анимированы
+// адаптация
 
-// лого при signin обрезается
+// плывет высота при смене регистрации\входа

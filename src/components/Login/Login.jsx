@@ -26,7 +26,7 @@ export default function Login() {
             type="email"
             placeholder="Ваш e-mail"
             isValid={true}
-            defValue="pochta@yandex.ru|"
+            defValue="pochta@yandex.ru"
           />
           <Input
             name="password"

@@ -14,6 +14,11 @@
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+}
+
+.search__wrapper:focus-within {
+  border-color: #3ddc84;
 }
 
 .search__input {

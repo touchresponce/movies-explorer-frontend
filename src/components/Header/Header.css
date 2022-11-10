@@ -1,6 +1,5 @@
 .header {
   display: flex;
-  box-sizing: content-box;
   margin: 0 auto;
   padding: 18px 70px;
   max-width: 1140px;

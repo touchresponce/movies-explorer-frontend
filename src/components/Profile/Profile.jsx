@@ -18,7 +18,8 @@ export default function Profile() {
               id="username"
               minLength="2"
               maxLength="30"
-              defaultValue={"Виталий"}
+              defaultValue="Виталий"
+              placeholder="Ваше имя"
               required
               autoComplete="off"
             />
@@ -32,7 +33,8 @@ export default function Profile() {
               id="email"
               minLength="2"
               maxLength="30"
-              defaultValue={"pochta@yandex.ru"}
+              defaultValue="pochta@yandex.ru"
+              placeholder="Ваш e-mail"
               required
               autoComplete="off"
             />

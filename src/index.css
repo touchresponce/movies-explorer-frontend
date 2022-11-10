@@ -1,6 +1,2 @@
 @import url("./vendor/normalize.css");
-
-/* .main {
-  margin: 0 auto;
-  max-width: 1280px;
-} */
+@import url("./vendor/fonts/fonts.css");

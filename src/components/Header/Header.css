@@ -1,8 +1,9 @@
 .header {
+  display: flex;
+  box-sizing: content-box;
   margin: 0 auto;
   padding: 18px 70px;
   max-width: 1140px;
-  display: flex;
   justify-content: space-between;
 }
 
@@ -22,4 +23,16 @@
 
 .header__image:hover {
   scale: 1.1;
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .header {
+    padding: 18px 14px;
+  }
 }

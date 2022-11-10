@@ -85,3 +85,9 @@
   background-repeat: no-repeat;
   background-position: center center;
 }
+
+@media screen and (max-width: 560px) {
+  .navigation__link_type_registration {
+    margin-right: 14px;
+  }
+}

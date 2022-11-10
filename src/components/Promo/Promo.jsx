@@ -5,7 +5,7 @@ export default function Promo() {
   return (
     <section className="promo">
       <div className="promo__container">
-        <div>
+        <div className="promo__text">
           <h1 className="promo__title">
             Учебный проект студента факультета Веб-разработки.
           </h1>
@@ -13,7 +13,7 @@ export default function Promo() {
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </h2>
         </div>
-        <img src={textLogo} alt="" />
+        <img className="promo__image" src={textLogo} alt="логотип" />
       </div>
       <button className="promo__button">Узнать больше</button>
     </section>

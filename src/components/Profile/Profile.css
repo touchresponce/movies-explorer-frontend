@@ -88,7 +88,7 @@
 
 .profile__logout {
   padding: 0;
-  margin: 0;
+  margin: 0 0 40px; /*нижний для мобилок*/
   width: 150px;
   border: none;
   background-color: transparent;

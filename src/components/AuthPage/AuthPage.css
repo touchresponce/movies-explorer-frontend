@@ -4,6 +4,7 @@
 
 .auth__wrapper {
   margin: 0 auto;
+  padding: 0 30px;
   max-width: 396px;
 }
 
@@ -49,4 +50,25 @@
   font-size: 14px;
   line-height: 17px;
   color: #4285f4;
+}
+
+@media screen and (max-width: 380px) {
+  .auth__text {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .auth__question {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .auth__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .auth__image {
+    margin: 0 auto;
+  }
 }

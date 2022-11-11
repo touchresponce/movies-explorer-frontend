@@ -11,6 +11,7 @@ export default function MoviesCard({ isSave }) {
         className={`movie__button ${
           isSave ? "movie__button_type_save" : "movie__button_type_unsave"
         }`}
+        type="button"
       />
     </article>
   );

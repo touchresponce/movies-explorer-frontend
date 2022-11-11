@@ -3,7 +3,9 @@
   flex-direction: column;
   align-items: center;
   margin: 74px auto 0;
+  padding: 0 30px;
   max-width: 410px;
+  transition: all 0.3s ease-in-out;
 }
 
 .profile__title {
@@ -26,6 +28,7 @@
   margin: 0;
   margin-bottom: 220px;
   border: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .profile__wrapper {
@@ -89,7 +92,7 @@
 
 .profile__logout {
   padding: 0;
-  margin: 0 0 40px; /*нижний для мобилок*/
+  margin: 0 0 40px;
   width: 150px;
   border: none;
   background-color: transparent;
@@ -105,4 +108,34 @@
 
 .profile__logout:hover {
   opacity: 0.9;
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    margin: 236px auto 0;
+  }
+
+  .profile__field {
+    margin-bottom: 210px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .profile {
+    margin: 236px auto 0;
+  }
+
+  .profile__field {
+    margin-bottom: 379px;
+  }
+
+  .profile__edit {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .profile__logout {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

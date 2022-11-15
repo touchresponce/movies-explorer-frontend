@@ -87,7 +87,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .navigation {
+  .display {
     display: none;
   }
 }

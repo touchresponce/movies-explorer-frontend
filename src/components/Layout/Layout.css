@@ -2,3 +2,43 @@
   margin: 0 auto;
   max-width: 1280px;
 }
+
+.popup {
+  background-color: #0000004d;
+  display: none;
+  justify-content: flex-end;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  -webkit-transform: translateY(-120%);
+  transform: translateY(-120%);
+  transition: all 0.5s;
+}
+
+.open {
+  display: flex;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.popup__wrapper {
+  align-items: center;
+  background-color: #202020;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: auto;
+  max-width: 520px;
+  min-height: 100vh;
+  padding: 22px 22px 90px;
+  row-gap: 105px;
+  width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+  .popup {
+    display: none;
+  }
+}

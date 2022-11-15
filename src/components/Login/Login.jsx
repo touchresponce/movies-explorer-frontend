@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Input from "../Input/Input";
 import AuthPage from "../AuthPage/AuthPage";
 
-export default function Login() {
+export default function Login({ isLogin, setIsLogin }) {
   const navigate = useNavigate();
 
   function navigateToMovies(e) {
     e.preventDefault();
+    setIsLogin(!isLogin);
     navigate("/movies");
   }
 

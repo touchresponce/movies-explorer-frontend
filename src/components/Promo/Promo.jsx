@@ -16,7 +16,9 @@ export default function Promo() {
         <img className="promo__image" src={textLogo} alt="логотип" />
       </div>
       <button className="promo__button" type="button">
-        Узнать больше
+        <a className="promo__link" href="#project">
+          Узнать больше
+        </a>
       </button>
     </section>
   );

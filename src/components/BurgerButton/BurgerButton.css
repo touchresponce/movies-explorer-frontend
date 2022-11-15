@@ -9,6 +9,10 @@
   z-index: 5;
 }
 
+.burger:hover {
+  opacity: 0.7;
+}
+
 .burger__button {
   width: 28px;
   height: 3px;

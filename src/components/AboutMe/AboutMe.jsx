@@ -1,7 +1,6 @@
 import Description from "../Description/Description";
 import "./AboutMe.css";
-import photo from "../../images/photo.png";
-import { Link } from "react-router-dom";
+import photo from "../../images/photo.svg";
 
 export default function AboutMe() {
   return (

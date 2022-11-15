@@ -40,11 +40,12 @@ export default function Profile({ isLogin, setIsLogin }) {
             />
           </div>
         </fieldset>
-        <button className="profile__edit" to="">
+        <button className="profile__edit" type="submit">
           Редактировать
         </button>
         <button
           className="profile__logout"
+          type="button"
           onClick={() => {
             setIsLogin(!isLogin);
             navigate("/");

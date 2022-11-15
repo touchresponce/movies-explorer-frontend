@@ -1,0 +1,157 @@
+.project {
+  padding: 110px 70px;
+  max-width: 1140px;
+  transition: all 0.3s ease-in-out;
+}
+
+.project__wrapper {
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.project__item {
+  max-width: 550px;
+}
+
+.project__title {
+  padding: 0;
+  margin: 0 0 26px 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.project__subtitle {
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.project__container {
+  margin-top: 110px;
+  display: flex;
+  text-align: center;
+}
+
+.project__backend {
+  flex: 2 1;
+}
+
+.project__backend-title {
+  background-color: #3ddc84;
+  padding: 9px 14px;
+  margin: 0 0 14px;
+  color: #000;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.project__backend-subtitle {
+  padding: 0;
+  margin: 0;
+  color: #8b8b8b;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.project__frontend {
+  flex: 8 1;
+}
+
+.project__frontend-title {
+  background-color: #303030;
+  padding: 9px 14px;
+  margin: 0 0 14px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.project__frontend-subtitle {
+  padding: 0;
+  margin: 0;
+  color: #8b8b8b;
+  font-weight: 400;
+
+  font-size: 14px;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 1024px) {
+  .project {
+    padding: 90px 50px;
+  }
+
+  .project__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .project__item {
+    max-width: 319px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .project {
+    padding: 70px 18px;
+  }
+
+  .project__title {
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+    margin-bottom: 16px;
+  }
+
+  .project__subtitle {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .project__wrapper {
+    margin-top: 60px;
+    flex-direction: column;
+    gap: 54px;
+  }
+
+  .project__container {
+    margin-top: 60px;
+  }
+
+  .project__item {
+    max-width: 100%;
+  }
+
+  .project__backend-title {
+    font-size: 11px;
+    line-height: 13px;
+    padding: 11px 0;
+    min-width: 100px;
+    white-space: nowrap;
+  }
+
+  .project__backend-subtitle {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .project__frontend-title {
+    font-size: 11px;
+    line-height: 13px;
+    padding: 11px 10px;
+  }
+
+  .project__frontend-subtitle {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

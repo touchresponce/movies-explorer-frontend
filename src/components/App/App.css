@@ -1,0 +1,7 @@
+.page {
+  background-color: #202020;
+  color: #fff;
+  font-family: "Inter", Arial, sans-serif;
+  min-height: 100vh;
+  position: relative;
+}

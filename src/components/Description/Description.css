@@ -1,0 +1,18 @@
+.description {
+  border-bottom: 1px solid #dadada;
+  margin: 0;
+  padding-bottom: 23px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 480px) {
+  .description {
+    padding-bottom: 28px;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+  }
+}

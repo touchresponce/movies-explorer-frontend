@@ -1,0 +1,53 @@
+.more {
+  display: flex;
+  justify-content: center;
+  margin: 80px 0 159px;
+}
+
+.more__button {
+  width: 320px;
+  background-color: #2f2f2f;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  outline: none;
+  padding: 11px 60px 9px;
+  position: relative;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  cursor: pointer;
+}
+
+.more__button::before,
+.more__button::after {
+  border: 0 solid transparent;
+  transition: all 0.3s;
+  content: "";
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+
+.more__button::before {
+  border-top: 2px solid #3ddc84;
+  right: 0;
+  top: 1px;
+}
+
+.more__button::after {
+  border-bottom: 2px solid #3ddc84;
+  bottom: 1px;
+  left: 0;
+}
+
+.more__button:hover::before,
+.more__button:hover::after {
+  width: 100%;
+}
+
+@media screen and (max-width: 415px) {
+  .more__button {
+    max-width: calc(100% - 40px * 2);
+  }
+}

@@ -4,40 +4,26 @@ class MainApi {
     this._headers = config.headers;
   }
 
-  // методы
-  _getHeaders() {
-    const jwt = localStorage.getItem("jwt");
-    return {
-      Authorization: `Bearer ${jwt}`,
-      ...this._headers,
-    };
-  }
-
-  register(name, email, password) {
-    return fetch(`${this._baseUrl}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-      }),
-    }).then(this._getResponce);
-  }
+  // _getHeaders() {
+  //   const jwt = localStorage.getItem("jwt");
+  //   return {
+  //     Authorization: `Bearer ${jwt}`,
+  //     ...this._headers,
+  //   };
+  // }
 
   // проверка ответа
   _getResponce(res) {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(res.status);
   }
 }
 
 const mainApi = new MainApi({
-  baseUrl: "https://bitfilms.touchresponce.nomoredomains.icu",
+  // baseUrl: "https://bitfilms.touchresponce.nomoredomains.icu",
+  baseUrl: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
   },

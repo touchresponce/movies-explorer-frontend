@@ -8,6 +8,7 @@ export default function Input({
   minLength,
   isValid,
   errors,
+  pattern,
   onChange,
 }) {
   return (
@@ -27,6 +28,7 @@ export default function Input({
           name={name}
           placeholder={placeholder}
           minLength={minLength}
+          pattern={pattern}
           onChange={onChange}
         />
       </div>

@@ -1,15 +1,18 @@
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
 import Input from "../Input/Input";
 import AuthPage from "../AuthPage/AuthPage";
+import useFormValidation from "../../utils/useFormValidation";
+import { EMAIL_PATTERN } from "../../utils/constants";
 
-export default function Login({ isLogin, setIsLogin }) {
-  const navigate = useNavigate();
+export default function Login({ handleLogin, serverError }) {
+  const { values, handleChange, errors, isValid } = useFormValidation();
 
-  function navigateToMovies(e) {
-    e.preventDefault();
-    setIsLogin(!isLogin);
-    navigate("/movies");
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    handleLogin({
+      email: values.email,
+      password: values.password,
+    });
   }
 
   return (
@@ -19,28 +22,41 @@ export default function Login({ isLogin, setIsLogin }) {
       linkPath="/signup"
       linkName="Регистрация"
     >
-      <form className="form login-form" name="login-form">
+      <form
+        className="form login-form"
+        name="login-form"
+        onSubmit={handleSubmit}
+      >
         <fieldset className="login__field">
           <Input
             name="email"
             label="E-mail"
             type="email"
             placeholder="Ваш e-mail"
-            isValid={true}
-            defValue="pochta@yandex.ru"
+            minLength="6"
+            isValid={isValid}
+            errors={errors.email}
+            pattern={EMAIL_PATTERN}
+            onChange={(evt) => handleChange(evt)}
           />
           <Input
             name="password"
             label="Пароль"
             type="password"
             placeholder="Ваш пароль"
-            isValid={true}
+            minLength="6"
+            isValid={isValid}
+            errors={errors.password}
+            onChange={(evt) => handleChange(evt)}
           />
         </fieldset>
+        <span className="login__span">{serverError}</span>
         <button
-          className="login__submit"
+          className={`login__submit ${
+            !isValid ? "login__submit_disabled" : ""
+          }`}
           type="submit"
-          onClick={navigateToMovies}
+          disabled={!isValid}
         >
           Войти
         </button>

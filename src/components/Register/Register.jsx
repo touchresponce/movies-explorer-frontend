@@ -2,8 +2,9 @@ import "./Register.css";
 import Input from "../Input/Input";
 import AuthPage from "../AuthPage/AuthPage";
 import useFormValidation from "../../utils/useFormValidation";
+import { EMAIL_PATTERN } from "../../utils/constants";
 
-export default function Register({ handleRegistration }) {
+export default function Register({ handleRegistration, serverError }) {
   const { values, handleChange, errors, isValid } = useFormValidation();
 
   function handleSubmit(evt) {
@@ -46,6 +47,7 @@ export default function Register({ handleRegistration }) {
             minLength="6"
             isValid={isValid}
             errors={errors.email}
+            pattern={EMAIL_PATTERN}
             onChange={(evt) => handleChange(evt)}
           />
           <Input
@@ -59,6 +61,7 @@ export default function Register({ handleRegistration }) {
             onChange={(evt) => handleChange(evt)}
           />
         </fieldset>
+        <span className="register__span">{serverError}</span>
         <button
           className={`register__submit ${
             !isValid ? "register__submit_disabled" : ""

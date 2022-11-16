@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Main from "../Main/Main";
 import NotFound from "../NotFound/NotFound";
 import Layout from "../Layout/Laout";
@@ -9,9 +9,27 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import { useState } from "react";
+import mainApi from "../../utils/MainApi";
 
 export default function App() {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
+
+  // регистрация
+  function handleRegistration({ name, email, password }) {
+    mainApi
+      .register(name, email, password)
+      .then(() => navigate("/signin"))
+      .catch((err) => {
+        console.log(err);
+      });
+    // .finally(() => {
+    //   setRegistration(true);
+    //   setTimeout(() => {
+    //     setRegistration(false);
+    //   }, 3000);
+    // });
+  }
 
   return (
     <div className="page">
@@ -20,7 +38,10 @@ export default function App() {
           path="/signin"
           element={<Login isLogin={isLogin} setIsLogin={setIsLogin} />}
         />
-        <Route path="signup" element={<Register />} />
+        <Route
+          path="signup"
+          element={<Register handleRegistration={handleRegistration} />}
+        />
         {/* общая верстка - шапка, подвал */}
         <Route path="/" element={<Layout isLogin={isLogin} />}>
           {/* защита */}
@@ -38,3 +59,5 @@ export default function App() {
     </div>
   );
 }
+
+// плывет верстка при ошибках в форме

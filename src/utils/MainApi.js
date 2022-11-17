@@ -4,13 +4,19 @@ class MainApi {
     this._headers = config.headers;
   }
 
-  // _getHeaders() {
-  //   const jwt = localStorage.getItem("jwt");
-  //   return {
-  //     Authorization: `Bearer ${jwt}`,
-  //     ...this._headers,
-  //   };
-  // }
+  _getHeaders() {
+    const jwt = localStorage.getItem("jwt");
+    return {
+      Authorization: `Bearer ${jwt}`,
+      ...this._headers,
+    };
+  }
+
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._getHeaders(),
+    }).then(this._getResponce);
+  }
 
   // проверка ответа
   _getResponce(res) {

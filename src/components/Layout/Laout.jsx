@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer";
 import { NavLink, Link, Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
 
-export default function Layout({ isLogin }) {
+export default function Layout({ loggedIn }) {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,33 +15,33 @@ export default function Layout({ isLogin }) {
     <>
       <Header
         className={location.pathname === "/" ? "header header-color" : "header"}
-        isLogin={isLogin}
+        loggedIn={loggedIn}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <main className="main">
+      <main className='main'>
         <Outlet />
       </main>
       {location.pathname === "/profile" ? null : <Footer />}
       <div className={`sidebar ${isOpen ? "open" : ""}`}>
-        <div className="sidebar__wrapper">
-          <nav className="sidebar__nav">
+        <div className='sidebar__wrapper'>
+          <nav className='sidebar__nav'>
             <NavLink
-              to="/"
+              to='/'
               className={setActive}
               onClick={() => setIsOpen(!isOpen)}
             >
               Главная
             </NavLink>
             <NavLink
-              to="/movies"
+              to='/movies'
               className={setActive}
               onClick={() => setIsOpen(!isOpen)}
             >
               Фильмы
             </NavLink>
             <NavLink
-              to="/saved-movies"
+              to='/saved-movies'
               className={setActive}
               onClick={() => setIsOpen(!isOpen)}
             >
@@ -49,12 +49,12 @@ export default function Layout({ isLogin }) {
             </NavLink>
           </nav>
           <Link
-            to="/profile"
-            className="sidebar__button"
+            to='/profile'
+            className='sidebar__button'
             onClick={() => setIsOpen(!isOpen)}
           >
             Аккаунт
-            <div className="navigation__icon" />
+            <div className='navigation__icon' />
           </Link>
         </div>
       </div>

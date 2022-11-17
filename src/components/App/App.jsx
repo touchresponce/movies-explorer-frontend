@@ -1,5 +1,7 @@
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
 import NotFound from "../NotFound/NotFound";
 import Layout from "../Layout/Laout";
@@ -10,30 +12,47 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import { useState } from "react";
 import auth from "../../utils/auth";
+import mainApi from "../../utils/MainApi";
+import * as movieApi from "../../utils/MoviesApi";
+import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
 
 export default function App() {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
-  const [serverError, setServerError] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [serverError, setServerError] = useState(""); // ошибка от сервера для отображения в логине\регистрации
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    if (localStorage.getItem("jwt")) {
+      setLoggedIn(true);
+      Promise.all([mainApi.getUserInfo(), movieApi.getMovies()])
+        .then(([apiUser, apiMovies]) => {
+          setCurrentUser({
+            name: apiUser.user.name,
+            email: apiUser.user.email,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
 
   // регистрация
   function handleRegistration({ name, email, password }) {
     auth
       .register(name, email, password)
-      .then(() => navigate("/signin"))
+      .then(() => {
+        navigate("/signin");
+        setServerError("");
+      })
       .catch((err) => {
         if (err === 409) {
-          setServerError("Пользователь с таким email уже существует");
+          return setServerError("Пользователь с таким email уже существует");
         } else if (err === 400) {
-          setServerError("Переданы некорректные данные");
+          return setServerError("Переданы некорректные данные");
+        } else {
+          return setServerError("Что-то пошло не так...");
         }
       });
-    // .finally(() => {
-    //   setRegistration(true);
-    //   setTimeout(() => {
-    //     setRegistration(false);
-    //   }, 3000);
-    // });
   }
 
   // вход
@@ -45,59 +64,72 @@ export default function App() {
       })
       .then((data) => {
         if (data.token) {
-          setIsLogin(true);
-          tokenCheck();
+          setLoggedIn(true);
+          navigate("/movies");
+          setServerError("");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err === 401) {
+          return setServerError("Неправильные почта или пароль");
+        } else {
+          return setServerError("Что-то пошло не так...");
+        }
+      });
   }
 
-  // проверка токена
-  function tokenCheck() {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth
-        .getToken(jwt)
-        .then(() => setIsLogin(true))
-        .catch((err) => console.log(err));
-    }
+  // выход
+  function signOut() {
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    setCurrentUser({});
   }
 
   return (
-    <div className="page">
+    <div className='page'>
       <Routes>
         <Route
-          path="/signin"
+          path='/signin'
           element={
-            <Login handleLogin={handleLogin} serverError={serverError} />
+            <Login
+              handleLogin={handleLogin}
+              serverError={serverError}
+              setServerError={setServerError}
+            />
           }
         />
         <Route
-          path="signup"
+          path='/signup'
           element={
             <Register
               handleRegistration={handleRegistration}
               serverError={serverError}
+              setServerError={setServerError}
             />
           }
         />
-        {/* общая верстка - шапка, подвал */}
-        <Route path="/" element={<Layout isLogin={isLogin} />}>
-          {/* защита */}
+        {/* общая верстка шапка подвал */}
+        <Route path='/' element={<Layout loggedIn={loggedIn} />}>
           <Route index element={<Main />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/saved-movies" element={<SavedMovies />} />
-          <Route
-            path="/profile"
-            element={<Profile isLogin={isLogin} setIsLogin={setIsLogin} />}
-          />
           {/* защита */}
+          <Route
+            element={
+              // приватные роуты с контекстом
+              <CurrentUserContext.Provider value={currentUser}>
+                <ProtectedRoutes loggedIn={loggedIn} />
+              </CurrentUserContext.Provider>
+            }
+          >
+            <Route path='/movies' element={<Movies />} exact />
+            <Route path='/saved-movies' element={<SavedMovies />} />
+            <Route
+              path='/profile'
+              element={<Profile setLoggedIn={setLoggedIn} signOut={signOut} />}
+            />
+          </Route>
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
   );
 }
-
-// плывет верстка при ошибках в форме
-// допилить вход

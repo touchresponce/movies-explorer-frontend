@@ -3,9 +3,14 @@ import Input from "../Input/Input";
 import AuthPage from "../AuthPage/AuthPage";
 import useFormValidation from "../../utils/useFormValidation";
 import { EMAIL_PATTERN } from "../../utils/constants";
+import { useEffect } from "react";
 
-export default function Login({ handleLogin, serverError }) {
+export default function Login({ handleLogin, serverError, setServerError }) {
   const { values, handleChange, errors, isValid } = useFormValidation();
+
+  useEffect(() => {
+    setServerError("");
+  }, []);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -17,45 +22,45 @@ export default function Login({ handleLogin, serverError }) {
 
   return (
     <AuthPage
-      title="Рады видеть!"
-      question="Еще не зарегистрированы?"
-      linkPath="/signup"
-      linkName="Регистрация"
+      title='Рады видеть!'
+      question='Еще не зарегистрированы?'
+      linkPath='/signup'
+      linkName='Регистрация'
     >
       <form
-        className="form login-form"
-        name="login-form"
+        className='form login-form'
+        name='login-form'
         onSubmit={handleSubmit}
       >
-        <fieldset className="login__field">
+        <fieldset className='login__field'>
           <Input
-            name="email"
-            label="E-mail"
-            type="email"
-            placeholder="Ваш e-mail"
-            minLength="6"
+            name='email'
+            label='E-mail'
+            type='email'
+            placeholder='Ваш e-mail'
+            minLength='6'
             isValid={isValid}
             errors={errors.email}
             pattern={EMAIL_PATTERN}
             onChange={(evt) => handleChange(evt)}
           />
           <Input
-            name="password"
-            label="Пароль"
-            type="password"
-            placeholder="Ваш пароль"
-            minLength="6"
+            name='password'
+            label='Пароль'
+            type='password'
+            placeholder='Ваш пароль'
+            minLength='6'
             isValid={isValid}
             errors={errors.password}
             onChange={(evt) => handleChange(evt)}
           />
         </fieldset>
-        <span className="login__span">{serverError}</span>
+        <span className='login__span'>{serverError}</span>
         <button
           className={`login__submit ${
             !isValid ? "login__submit_disabled" : ""
           }`}
-          type="submit"
+          type='submit'
           disabled={!isValid}
         >
           Войти

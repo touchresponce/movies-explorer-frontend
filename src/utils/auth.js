@@ -4,14 +4,6 @@ class Auth {
     this._headers = config.headers;
   }
 
-  _getHeaders() {
-    const jwt = localStorage.getItem("jwt");
-    return {
-      Authorization: `Bearer ${jwt}`,
-      ...this._headers,
-    };
-  }
-
   // регистрация
   register(name, email, password) {
     return fetch(`${this._baseUrl}/signup`, {

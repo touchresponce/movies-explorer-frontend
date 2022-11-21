@@ -18,6 +18,17 @@ class MainApi {
     }).then(this._getResponce);
   }
 
+  updateUserInfo({ name, email }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._getHeaders(),
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
+    }).then(this._getResponce);
+  }
+
   // проверка ответа
   _getResponce(res) {
     if (res.ok) {

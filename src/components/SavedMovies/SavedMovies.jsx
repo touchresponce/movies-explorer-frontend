@@ -1,10 +1,10 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-export default function SavedMovies() {
+export default function SavedMovies({ setSearchText }) {
   return (
     <>
-      <SearchForm />
+      <SearchForm setSearchText={setSearchText} />
       <MoviesCardList />
     </>
   );

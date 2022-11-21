@@ -26,7 +26,7 @@
 .profile__field {
   padding: 0;
   margin: 0;
-  margin-bottom: 220px;
+  margin-bottom: 188px;
   border: none;
   transition: all 0.3s ease-in-out;
 }
@@ -66,11 +66,38 @@
   outline: none;
 }
 
+.profile__input_color {
+  color: #ee3465;
+}
+
 .profile__wrapper:focus-within {
   outline: 1px solid #3ddc84;
 }
 
-.profile__edit {
+.profile__buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.profile__responce {
+  margin: 0 0 15px;
+  min-height: 17px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 12px;
+  text-align: center;
+}
+
+.profile__responce_type_error {
+  color: #ee3465;
+}
+
+.profile__responce_type_success {
+  color: #3ddc84;
+}
+
+.profile__submit {
   padding: 0;
   margin: 0 0 16px;
   border: none;
@@ -84,9 +111,15 @@
   text-decoration: none;
   align-self: center;
   transition: all 0.3s ease-in;
+  position: relative;
 }
 
-.profile__edit:hover {
+.profile__submit:hover {
+  opacity: 0.7;
+}
+
+.profile__submit_disabled {
+  cursor: default;
   opacity: 0.7;
 }
 
@@ -108,6 +141,33 @@
 
 .profile__logout:hover {
   opacity: 0.9;
+}
+
+.profile__error {
+  visibility: hidden;
+  min-height: 12px;
+  color: #ee3465;
+  font-size: 10px;
+}
+
+.profile__error_active {
+  visibility: visible;
+}
+
+.profile__wrapper {
+  position: relative;
+}
+
+.profile__wrapper:first-of-type .profile__error:first-of-type {
+  position: absolute;
+  right: 0;
+  top: -20px;
+}
+
+.profile__wrapper:last-of-type .profile__error:last-of-type {
+  position: absolute;
+  right: 0;
+  bottom: -20px;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
 import NotFound from "../NotFound/NotFound";
@@ -10,7 +10,6 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import { useState } from "react";
 import auth from "../../utils/auth";
 import mainApi from "../../utils/MainApi";
 import * as movieApi from "../../utils/MoviesApi";
@@ -20,13 +19,14 @@ export default function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [serverError, setServerError] = useState(""); // ошибка от сервера для отображения в логине\регистрации
+  const [serverResponce, setServerResponce] = useState(""); // ответ для профайла
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
       setLoggedIn(true);
-      Promise.all([mainApi.getUserInfo(), movieApi.getMovies()])
-        .then(([apiUser, apiMovies]) => {
+      Promise.all([mainApi.getUserInfo()])
+        .then(([apiUser]) => {
           setCurrentUser({
             name: apiUser.user.name,
             email: apiUser.user.email,
@@ -41,8 +41,7 @@ export default function App() {
     auth
       .register(name, email, password)
       .then(() => {
-        navigate("/signin");
-        setServerError("");
+        handleLogin({ email, password });
       })
       .catch((err) => {
         if (err === 409) {
@@ -79,10 +78,44 @@ export default function App() {
   }
 
   // выход
-  function signOut() {
+  function handleLogout() {
     setLoggedIn(false);
-    localStorage.removeItem("jwt");
+    localStorage.clear();
     setCurrentUser({});
+  }
+
+  // редактирование пользователя
+  function handleUserUpdate({ name, email }) {
+    mainApi
+      .updateUserInfo({ name, email })
+      .then(() => {
+        setCurrentUser({ name, email });
+        setServerResponce("Данные успешно обновлены");
+      })
+      .catch((err) => {
+        if (err === 400) {
+          setServerError("Переданы некорректные данные");
+        } else {
+          return setServerError("Что-то пошло не так...");
+        }
+      })
+      .finally(() => setTimeout(() => setServerResponce(""), 3000));
+  }
+
+  // все фильмы
+  function getAllMovies() {
+    if (localStorage.getItem("allMovies")) {
+      return;
+    }
+
+    return movieApi
+      .getMovies()
+      .then((movies) => {
+        localStorage.setItem("allMovies", JSON.stringify(movies));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -120,11 +153,24 @@ export default function App() {
               </CurrentUserContext.Provider>
             }
           >
-            <Route path='/movies' element={<Movies />} exact />
+            <Route
+              path='/movies'
+              element={<Movies getAllMovies={getAllMovies} />}
+              exact
+            />
             <Route path='/saved-movies' element={<SavedMovies />} />
             <Route
               path='/profile'
-              element={<Profile setLoggedIn={setLoggedIn} signOut={signOut} />}
+              element={
+                <Profile
+                  handleLogout={handleLogout}
+                  handleUserUpdate={handleUserUpdate}
+                  serverError={serverError}
+                  setServerError={setServerError}
+                  serverResponce={serverResponce}
+                  setServerResponce={setServerResponce}
+                />
+              }
             />
           </Route>
         </Route>
@@ -133,3 +179,17 @@ export default function App() {
     </div>
   );
 }
+
+// отображение 3 карточек, кнопка показать еще подгружает след ряд фильмов
+// чекбокс на короткометражки
+// лайки\дизлайки\отображение лайкнутых
+// прелоадер блеать при загрузке фильмов как минимум
+
+// отображение времени на фильмах блеать
+// нажатие на картинку ведет на ютуб трейлер блеать
+
+// блеать
+
+// плывет верстка при ошибках в форме регистрации\авторизации
+// плывет верстка при ответе сервера в profile
+// обработать ошибки при входе в app

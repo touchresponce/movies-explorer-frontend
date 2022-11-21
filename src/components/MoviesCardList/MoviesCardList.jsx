@@ -1,21 +1,17 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList() {
+export default function MoviesCardList({ filtredMovies }) {
   return (
-    <section className="movies">
-      <MoviesCard />
-      <MoviesCard isSave={true} />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
+    <section className='movies'>
+      {filtredMovies?.map((movie) => (
+        <MoviesCard
+          key={movie.id}
+          title={movie.nameRU}
+          duration={movie.duration}
+          preview={movie.image.url}
+        />
+      ))}
     </section>
   );
 }

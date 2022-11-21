@@ -3,7 +3,7 @@ import MoreButton from "../MoreButton/MoreButton";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-export default function Movies({ getAllMovies }) {
+export default function Movies({ isLoading, getAllMovies }) {
   const [searchText, setSearchText] = useState("");
   const [filtredMovies, setFiltredMovies] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
@@ -50,7 +50,7 @@ export default function Movies({ getAllMovies }) {
         handleSubmit={handleSubmit}
         setIsChecked={setIsChecked}
       />
-      <MoviesCardList filtredMovies={filtredMovies} />
+      <MoviesCardList isLoading={isLoading} filtredMovies={filtredMovies} />
       <MoreButton />
     </>
   );

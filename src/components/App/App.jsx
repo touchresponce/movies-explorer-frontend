@@ -21,6 +21,7 @@ export default function App() {
   const [serverError, setServerError] = useState(""); // ошибка от сервера для отображения в логине\регистрации
   const [serverResponce, setServerResponce] = useState(""); // ответ для профайла
   const [currentUser, setCurrentUser] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
@@ -108,6 +109,8 @@ export default function App() {
       return;
     }
 
+    setIsLoading(true);
+
     return movieApi
       .getMovies()
       .then((movies) => {
@@ -115,7 +118,8 @@ export default function App() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   }
 
   return (
@@ -155,7 +159,9 @@ export default function App() {
           >
             <Route
               path='/movies'
-              element={<Movies getAllMovies={getAllMovies} />}
+              element={
+                <Movies isLoading={isLoading} getAllMovies={getAllMovies} />
+              }
               exact
             />
             <Route path='/saved-movies' element={<SavedMovies />} />
@@ -193,3 +199,10 @@ export default function App() {
 // плывет верстка при ошибках в форме регистрации\авторизации
 // плывет верстка при ответе сервера в profile
 // обработать ошибки при входе в app
+
+// До получения данных блок содержит прелоадер. Если ничего не найдено,
+// на месте прелоадера появляется надпись «Ничего не найдено».
+// Если в процессе получения и обработки данных происходит ошибка, в окне
+// результатов выводится надпись: «Во время запроса произошла ошибка.
+// Возможно, проблема с соединением или сервер недоступен. Подождите
+// немного и попробуйте ещё раз».

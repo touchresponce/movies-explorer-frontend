@@ -8,6 +8,11 @@
   padding: 0 70px;
 }
 
+.movies-loader {
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1080px) {
   .movies {
     grid-template-columns: repeat(2, minmax(300px, 1fr));

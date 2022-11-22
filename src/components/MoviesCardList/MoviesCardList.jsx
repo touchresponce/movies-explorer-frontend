@@ -14,6 +14,7 @@ export default function MoviesCardList({ isLoading, filtredMovies }) {
             title={movie.nameRU}
             duration={movie.duration}
             preview={movie.image.url}
+            trailer={movie.trailerLink}
           />
         ))
       )}

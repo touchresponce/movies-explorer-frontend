@@ -5,6 +5,7 @@ export default function SearchForm({
   searchText,
   setSearchText,
   handleSubmit,
+  isChecked,
   setIsChecked,
 }) {
   return (
@@ -27,7 +28,7 @@ export default function SearchForm({
           </button>
           <span></span>
         </div>
-        <FilterCheckbox setIsChecked={setIsChecked} />
+        <FilterCheckbox isChecked={isChecked} setIsChecked={setIsChecked} />
       </form>
     </section>
   );

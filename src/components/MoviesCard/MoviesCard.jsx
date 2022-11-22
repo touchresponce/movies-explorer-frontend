@@ -1,6 +1,12 @@
 import "./MoviesCard.css";
 
-export default function MoviesCard({ isSave, title, duration, preview }) {
+export default function MoviesCard({
+  isSave,
+  title,
+  duration,
+  preview,
+  trailer,
+}) {
   function setDuration(mins) {
     let hours = Math.trunc(mins / 60);
     let minutes = mins % 60;
@@ -17,11 +23,13 @@ export default function MoviesCard({ isSave, title, duration, preview }) {
         }`}
         type='button'
       />
-      <img
-        className='movie__image'
-        src={`https://api.nomoreparties.co${preview}`}
-        alt='кадр из фильма'
-      />
+      <a href={trailer} target='_blank' rel='noreferrer'>
+        <img
+          className='movie__image'
+          src={`https://api.nomoreparties.co${preview}`}
+          alt='кадр из фильма'
+        />
+      </a>
     </article>
   );
 }

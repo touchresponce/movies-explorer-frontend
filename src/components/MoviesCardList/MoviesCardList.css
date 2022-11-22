@@ -8,6 +8,15 @@
   padding: 0 70px;
 }
 
+.movies__message {
+  padding: 0 70px;
+  margin: 0;
+  text-align: center;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+}
+
 .movies-loader {
   display: flex;
   justify-content: center;

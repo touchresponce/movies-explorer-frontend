@@ -18,7 +18,7 @@ import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes";
 export default function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [serverError, setServerError] = useState(""); // ошибка от сервера для отображения в логине\регистрации
+  const [serverError, setServerError] = useState(""); // ошибка от сервера
   const [serverResponce, setServerResponce] = useState(""); // ответ для профайла
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -118,8 +118,14 @@ export default function App() {
       })
       .catch((err) => {
         console.log(err);
+        setServerError(
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+        );
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        setTimeout(() => setServerError(""), 3000);
+      });
   }
 
   return (
@@ -160,7 +166,11 @@ export default function App() {
             <Route
               path='/movies'
               element={
-                <Movies isLoading={isLoading} getAllMovies={getAllMovies} />
+                <Movies
+                  isLoading={isLoading}
+                  getAllMovies={getAllMovies}
+                  serverError={serverError}
+                />
               }
               exact
             />
@@ -187,22 +197,27 @@ export default function App() {
 }
 
 // отображение 3 карточек, кнопка показать еще подгружает след ряд фильмов
-// чекбокс на короткометражки
-// лайки\дизлайки\отображение лайкнутых
-// прелоадер блеать при загрузке фильмов как минимум
 
-// отображение времени на фильмах блеать
+// чекбокс на короткометражки
+
+// лайки\дизлайки\отображение лайкнутых в сохраненках
+
 // нажатие на картинку ведет на ютуб трейлер блеать
 
 // блеать
 
 // плывет верстка при ошибках в форме регистрации\авторизации
+
 // плывет верстка при ответе сервера в profile
+
 // обработать ошибки при входе в app
 
-// До получения данных блок содержит прелоадер. Если ничего не найдено,
-// на месте прелоадера появляется надпись «Ничего не найдено».
 // Если в процессе получения и обработки данных происходит ошибка, в окне
 // результатов выводится надпись: «Во время запроса произошла ошибка.
 // Возможно, проблема с соединением или сервер недоступен. Подождите
 // немного и попробуйте ещё раз».
+
+// блеать, задеплоить еще надо
+
+// Если карточки уже были отображены на странице в блоке результатов, клик по чекбоксу
+// «Короткометражки» приводит к повторной фильтрации результата.

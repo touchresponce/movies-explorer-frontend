@@ -9,6 +9,62 @@ export default function Movies({ isLoading, getAllMovies, serverError }) {
   const [filtredMovies, setFiltredMovies] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
   const [isEmpty, setIsEmpty] = useState("");
+  const [displayedMovies, setDisplayedMovies] = useState(() => calculateSize());
+
+  const [AddMoreMovies, setMoreMovies] = useState(() => {
+    if (window.innerWidth > 1080) {
+      return 3;
+    } else if (window.innerWidth > 768) {
+      return 2;
+    } else if (window.innerWidth > 320) {
+      return 2;
+    }
+  });
+
+  function calculateSize() {
+    if (window.innerWidth > 1280) {
+      return 12;
+    } else if (window.innerWidth > 1080) {
+      return 9;
+    } else if (window.innerWidth > 768) {
+      return 8;
+    } else if (window.innerWidth > 320) {
+      return 5;
+    }
+  }
+
+  // сброс колва фильмов при смене запроса
+  useEffect(() => setDisplayedMovies(calculateSize()), [filtredMovies]);
+
+  function resizeWindow() {
+    setTimeout(() => {
+      if (window.innerWidth > 1280) {
+        setDisplayedMovies(12);
+        setMoreMovies(3);
+      } else if (window.innerWidth > 1080) {
+        setDisplayedMovies(9);
+        setMoreMovies(3);
+      } else if (window.innerWidth > 768) {
+        setDisplayedMovies(8);
+        setMoreMovies(2);
+      } else if (window.innerWidth > 320) {
+        setDisplayedMovies(5);
+        setMoreMovies(2);
+      }
+    }, 300);
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", resizeWindow);
+    return () => window.removeEventListener("resize", resizeWindow);
+  }, []);
+
+  const dataMovies = filtredMovies?.slice(0, displayedMovies);
+
+  // отобразить больше фильмов
+  function handleMore() {
+    setDisplayedMovies((prev) => prev + AddMoreMovies);
+  }
 
   // подтягивание запроса\отобр фильмов при переходе по страницам
   useEffect(() => {
@@ -38,6 +94,7 @@ export default function Movies({ isLoading, getAllMovies, serverError }) {
     );
   }
 
+  // сабмит формы поиска
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -66,9 +123,11 @@ export default function Movies({ isLoading, getAllMovies, serverError }) {
       {isEmpty ? (
         <p className='movies__message'>{isEmpty}</p>
       ) : (
-        <MoviesCardList isLoading={isLoading} filtredMovies={filtredMovies} />
+        <MoviesCardList isLoading={isLoading} filtredMovies={dataMovies} />
       )}
-      <MoreButton />
+      {filtredMovies?.length > dataMovies?.length ? (
+        <MoreButton handleMore={handleMore} />
+      ) : null}
     </>
   );
 }

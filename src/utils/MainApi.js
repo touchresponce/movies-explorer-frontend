@@ -29,6 +29,40 @@ class MainApi {
     }).then(this._getResponce);
   }
 
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
+      headers: this._getHeaders(),
+    }).then(this._getResponce);
+  }
+
+  saveMovie(movie) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "POST",
+      headers: this._getHeaders(),
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: movie.image,
+        trailerLink: movie.trailerLink,
+        thumbnail: movie.image,
+        owner: movie.owner,
+        movieId: String(movie.movieId),
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
+    }).then(this._getResponce);
+  }
+
+  deleteMovie(id) {
+    return fetch(`${this._baseUrl}/movies/${id}`, {
+      method: "DELETE",
+      headers: this._getHeaders(),
+    }).then(this._getResponce);
+  }
+
   // проверка ответа
   _getResponce(res) {
     if (res.ok) {

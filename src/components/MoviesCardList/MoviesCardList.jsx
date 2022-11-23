@@ -2,7 +2,12 @@ import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 
-export default function MoviesCardList({ isLoading, filtredMovies }) {
+export default function MoviesCardList({
+  isLoading,
+  filtredMovies,
+  handleSaveMovie,
+  handleDeleteMovie,
+}) {
   return (
     <section className={`movies ${isLoading ? "movies-loader" : ""}`}>
       {isLoading ? (
@@ -10,11 +15,11 @@ export default function MoviesCardList({ isLoading, filtredMovies }) {
       ) : (
         filtredMovies?.map((movie) => (
           <MoviesCard
-            key={movie.id}
-            title={movie.nameRU}
-            duration={movie.duration}
-            preview={movie.image.url}
-            trailer={movie.trailerLink}
+            key={movie.id || movie._id}
+            id={movie.id || movie._id}
+            movie={movie}
+            handleSaveMovie={handleSaveMovie}
+            handleDeleteMovie={handleDeleteMovie}
           />
         ))
       )}

@@ -103,7 +103,7 @@ export default function App() {
       .finally(() => setTimeout(() => setServerResponce(""), 3000));
   }
 
-  // все фильмы
+  // получить все фильмы
   function getAllMovies() {
     if (localStorage.getItem("allMovies")) {
       return;
@@ -116,8 +116,7 @@ export default function App() {
       .then((movies) => {
         localStorage.setItem("allMovies", JSON.stringify(movies));
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setServerError(
           "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
         );
@@ -126,6 +125,67 @@ export default function App() {
         setIsLoading(false);
         setTimeout(() => setServerError(""), 3000);
       });
+  }
+
+  //
+  //
+  //
+  //
+  const [saved, setSaved] = useState([]);
+
+  // получить сохраненки
+  function getSavedMovies() {
+    setIsLoading(true);
+
+    return mainApi
+      .getSavedMovies()
+      .then((movies) => {
+        setSaved(movies.data);
+      })
+      .catch(() => {
+        setServerError(
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setTimeout(() => setServerError(""), 3000);
+      });
+  }
+
+  // сохранить фильм
+  function handleSaveMovie(movie) {
+    mainApi
+      .saveMovie({
+        country: movie.country || "Not Country",
+        director: movie.director || "Not director",
+        duration: movie.duration || "0",
+        year: movie.year || "0000",
+        description: movie.description || "Not description",
+        image: movie.image
+          ? `https://api.nomoreparties.co${movie.image.url}`
+          : "No Image",
+        trailerLink: movie.trailerLink || "https://www.youtube.com/",
+        thumbnail: movie.image
+          ? `https://api.nomoreparties.co${movie.image.url}`
+          : "No Image",
+        movieId: movie.id,
+        nameRU: movie.nameRU || "Not nameRU",
+        nameEN: movie.nameEN || "Not nameEN",
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
+
+  // удалить фильм из сохраненок
+  function handleDeleteMovie(id) {
+    mainApi
+      .deleteMovie(id)
+      .then((res) => {
+        console.log(res);
+        getSavedMovies();
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -170,11 +230,26 @@ export default function App() {
                   isLoading={isLoading}
                   getAllMovies={getAllMovies}
                   serverError={serverError}
+                  handleSaveMovie={handleSaveMovie}
+                  handleDeleteMovie={handleDeleteMovie}
                 />
               }
               exact
             />
-            <Route path='/saved-movies' element={<SavedMovies />} />
+            <Route
+              path='/saved-movies'
+              element={
+                <SavedMovies
+                  isLoading={isLoading}
+                  getSavedMovies={getSavedMovies}
+                  serverError={serverError}
+                  handleDeleteMovie={handleDeleteMovie}
+                  //
+                  //
+                  saved={saved}
+                />
+              }
+            />
             <Route
               path='/profile'
               element={
@@ -196,15 +271,17 @@ export default function App() {
   );
 }
 
-// !!!!! чекбокс не сохраняет состояние после перехода по страницам
-
 // лайки\дизлайки\отображение лайкнутых в сохраненках
+
+// можно добавить сколько угодно одинаковых фильмов
+
+// фильтрация сохраненок
 
 // блеать, задеплоить еще надо
 
 // плывет верстка при ошибках в форме регистрации\авторизации
 // плывет верстка при ответе сервера в profile
 
-// по чекбоксу
-// вариант всё фильтровать и записывать в локалку вместе с основными фильмами
-// а на чекбокс менять отображение тех или иных блеать
+// сохраненки
+// при монтировании компонента подтягивать сохраненки со своей бд
+// передавать ошибки и "ничего не найдено" в компонент

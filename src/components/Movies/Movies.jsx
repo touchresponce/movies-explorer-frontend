@@ -4,7 +4,13 @@ import MoreButton from "../MoreButton/MoreButton";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-export default function Movies({ isLoading, getAllMovies, serverError }) {
+export default function Movies({
+  isLoading,
+  getAllMovies,
+  serverError,
+  handleSaveMovie,
+  handleDeleteMovie,
+}) {
   const [searchText, setSearchText] = useState("");
   const [filtredMovies, setFiltredMovies] = useState([]);
   const [isEmpty, setIsEmpty] = useState("");
@@ -163,7 +169,12 @@ export default function Movies({ isLoading, getAllMovies, serverError }) {
       {isEmpty ? (
         <p className='movies__message'>{isEmpty}</p>
       ) : (
-        <MoviesCardList isLoading={isLoading} filtredMovies={dataMovies} />
+        <MoviesCardList
+          isLoading={isLoading}
+          filtredMovies={dataMovies}
+          handleSaveMovie={handleSaveMovie}
+          handleDeleteMovie={handleDeleteMovie}
+        />
       )}
       {filtredMovies?.length > dataMovies?.length ? (
         <MoreButton handleMore={handleMore} />

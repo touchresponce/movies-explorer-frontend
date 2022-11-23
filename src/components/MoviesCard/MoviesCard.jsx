@@ -1,5 +1,6 @@
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
+import formatTime from "../../utils/formatTime";
 
 export default function MoviesCard({
   isSave,
@@ -10,13 +11,6 @@ export default function MoviesCard({
 }) {
   const { pathname } = useLocation();
 
-  // форматирование времени
-  function setDuration(mins) {
-    let hours = Math.trunc(mins / 60);
-    let minutes = mins % 60;
-    return hours >= 1 ? `${hours}ч ${minutes}м` : `${minutes}м`;
-  }
-
   const imageUrl = movie.image.url
     ? `https://api.nomoreparties.co/${movie.image.url}`
     : movie.thumbnail;
@@ -24,7 +18,7 @@ export default function MoviesCard({
   return (
     <article className='movie'>
       <h3 className='movie__title'>{movie.nameRU}</h3>
-      <p className='movie__duration'>{setDuration(movie.duration)}</p>
+      <p className='movie__duration'>{formatTime(movie.duration)}</p>
       {pathname === "/movies" ? (
         <button
           className={`movie__button ${

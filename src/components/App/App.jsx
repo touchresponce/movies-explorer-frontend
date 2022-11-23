@@ -22,6 +22,7 @@ export default function App() {
   const [serverResponce, setServerResponce] = useState(""); // ответ для профайла
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
@@ -127,12 +128,6 @@ export default function App() {
       });
   }
 
-  //
-  //
-  //
-  //
-  const [saved, setSaved] = useState([]);
-
   // получить сохраненки
   function getSavedMovies() {
     setIsLoading(true);
@@ -140,7 +135,7 @@ export default function App() {
     return mainApi
       .getSavedMovies()
       .then((movies) => {
-        setSaved(movies.data);
+        setSavedMovies(movies.data);
       })
       .catch(() => {
         setServerError(
@@ -153,8 +148,18 @@ export default function App() {
       });
   }
 
+  useEffect(() => {
+    loggedIn && getSavedMovies();
+  }, [loggedIn]);
+
   // сохранить фильм
   function handleSaveMovie(movie) {
+    if (
+      savedMovies.some((state) => state.movieId === movie.id) ||
+      savedMovies.some((state) => state.id === movie.id)
+    )
+      return;
+
     mainApi
       .saveMovie({
         country: movie.country || "Not Country",
@@ -173,7 +178,10 @@ export default function App() {
         nameRU: movie.nameRU || "Not nameRU",
         nameEN: movie.nameEN || "Not nameEN",
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        setSavedMovies([...savedMovies, movie]);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -244,9 +252,7 @@ export default function App() {
                   getSavedMovies={getSavedMovies}
                   serverError={serverError}
                   handleDeleteMovie={handleDeleteMovie}
-                  //
-                  //
-                  saved={saved}
+                  savedMovies={savedMovies}
                 />
               }
             />
@@ -271,17 +277,19 @@ export default function App() {
   );
 }
 
-// лайки\дизлайки\отображение лайкнутых в сохраненках
+// https://cs4.pikabu.ru/post_img/big/2015/05/07/6/1430989171_1871837159.jpg
+
+// отображение состояния лайка в кнопке /movies
 
 // можно добавить сколько угодно одинаковых фильмов
 
+// перевернуть отрисовку сохраненок
+
 // фильтрация сохраненок
+
+// передавать ошибки и "ничего не найдено" в компонент
 
 // блеать, задеплоить еще надо
 
 // плывет верстка при ошибках в форме регистрации\авторизации
 // плывет верстка при ответе сервера в profile
-
-// сохраненки
-// при монтировании компонента подтягивать сохраненки со своей бд
-// передавать ошибки и "ничего не найдено" в компонент

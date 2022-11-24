@@ -45,7 +45,11 @@ export default function MoviesCard({
         />
       )}
 
-      <a href={movie.trailer} target='_blank' rel='noreferrer'>
+      <a
+        href={movie.trailer || movie.trailerLink}
+        target='_blank'
+        rel='noreferrer'
+      >
         <img className='movie__image' src={imageUrl} alt='кадр из фильма' />
       </a>
     </article>

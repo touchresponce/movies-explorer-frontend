@@ -14,9 +14,8 @@ export default function Movies({
   const [searchText, setSearchText] = useState("");
   const [filtredMovies, setFiltredMovies] = useState([]);
   const [isEmpty, setIsEmpty] = useState("");
-
   const [isChecked, setIsChecked] = useState(() => {
-    if (JSON.parse(localStorage.getItem("isShort"))?.short) {
+    if (JSON.parse(localStorage.getItem("isMoviesShort"))?.short) {
       return true;
     } else {
       return false;
@@ -136,7 +135,7 @@ export default function Movies({
 
   function saveShort() {
     localStorage.setItem(
-      "isShort",
+      "isMoviesShort",
       JSON.stringify({
         short: isChecked,
       })

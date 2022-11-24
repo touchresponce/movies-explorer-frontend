@@ -9,7 +9,7 @@ export default function SearchForm({
   isChecked,
   setIsChecked,
 }) {
-  const [isValidity, setIsValidity] = useState(true);
+  const [isValidity, setIsValidity] = useState(false);
 
   function handleChange(e) {
     setSearchText(e.target.value);

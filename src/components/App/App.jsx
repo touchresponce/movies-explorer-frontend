@@ -132,7 +132,7 @@ export default function App() {
   function getSavedMovies() {
     setIsLoading(true);
 
-    return mainApi
+    mainApi
       .getSavedMovies()
       .then((movies) => {
         setSavedMovies(movies.data);
@@ -180,7 +180,8 @@ export default function App() {
       })
       .then((res) => {
         console.log(res);
-        setSavedMovies([...savedMovies, movie]);
+        getSavedMovies();
+        // setSavedMovies([...savedMovies, movie]);
       })
       .catch((err) => console.log(err));
   }
@@ -192,11 +193,8 @@ export default function App() {
       .then((res) => {
         console.log(res);
         getSavedMovies();
+        setSavedMovies((prev) => prev.filter((item) => item.id !== id));
       })
-      // .then((res) => {
-      //   console.log(res);
-      //   setSavedMovies((state) => state.map((c) => (c.id === id ? res : c)));
-      // })
       .catch((err) => console.log(err));
   }
 
@@ -244,6 +242,7 @@ export default function App() {
                   serverError={serverError}
                   handleSaveMovie={handleSaveMovie}
                   handleDeleteMovie={handleDeleteMovie}
+                  savedMovies={savedMovies}
                 />
               }
               exact
@@ -280,16 +279,3 @@ export default function App() {
     </div>
   );
 }
-
-// https://cs4.pikabu.ru/post_img/big/2015/05/07/6/1430989171_1871837159.jpg
-
-// отображение состояния лайка в кнопке /movies
-
-// перевернуть отрисовку сохраненок
-
-// прыгает страница при удалении фильма
-
-// блеать, задеплоить еще надо?
-
-// плывет верстка при ошибках в форме регистрации\авторизации
-// плывет верстка при ответе сервера в profile

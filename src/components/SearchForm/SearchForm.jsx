@@ -1,3 +1,4 @@
+import { useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
@@ -8,6 +9,13 @@ export default function SearchForm({
   isChecked,
   setIsChecked,
 }) {
+  const [isValidity, setIsValidity] = useState(true);
+
+  function handleChange(e) {
+    setSearchText(e.target.value);
+    setIsValidity(e.target.checkValidity());
+  }
+
   return (
     <section className='search'>
       <form className='form search__form' onSubmit={handleSubmit}>
@@ -21,9 +29,17 @@ export default function SearchForm({
             autoComplete='off'
             required
             defaultValue={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            onChange={handleChange}
           />
-          <button className='search__button' type='submit'>
+          <button
+            className={
+              isValidity
+                ? "search__button"
+                : "search__button search__button_disabled"
+            }
+            type='submit'
+            disabled={!isValidity}
+          >
             Поиск
           </button>
           <span></span>

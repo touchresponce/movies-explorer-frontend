@@ -3,13 +3,17 @@ import { useLocation } from "react-router-dom";
 import formatTime from "../../utils/formatTime";
 
 export default function MoviesCard({
-  isSave,
   id,
   movie,
   handleSaveMovie,
   handleDeleteMovie,
+  savedMovies,
 }) {
   const { pathname } = useLocation();
+
+  const isSave = savedMovies?.some((state) => state.movieId === id);
+
+  const movieToDelete = savedMovies?.find((el) => el.movieId === id);
 
   const imageUrl = movie.image.url
     ? `https://api.nomoreparties.co/${movie.image.url}`
@@ -25,13 +29,19 @@ export default function MoviesCard({
             isSave ? "movie__button_type_save" : "movie__button_type_unsave"
           }`}
           type='button'
-          onClick={() => handleSaveMovie(movie)}
+          onClick={() => {
+            isSave
+              ? handleDeleteMovie(movieToDelete._id)
+              : handleSaveMovie(movie);
+          }}
         />
       ) : (
         <button
           className='movie__button movie__button_type_delete'
           type='button'
-          onClick={() => handleDeleteMovie(id)}
+          onClick={() => {
+            handleDeleteMovie(id);
+          }}
         />
       )}
 

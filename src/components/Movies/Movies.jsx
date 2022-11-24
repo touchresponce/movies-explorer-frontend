@@ -10,6 +10,7 @@ export default function Movies({
   serverError,
   handleSaveMovie,
   handleDeleteMovie,
+  savedMovies,
 }) {
   const [searchText, setSearchText] = useState("");
   const [filtredMovies, setFiltredMovies] = useState([]);
@@ -173,6 +174,7 @@ export default function Movies({
           filtredMovies={dataMovies}
           handleSaveMovie={handleSaveMovie}
           handleDeleteMovie={handleDeleteMovie}
+          savedMovies={savedMovies}
         />
       )}
       {filtredMovies?.length > dataMovies?.length ? (

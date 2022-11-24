@@ -53,6 +53,10 @@
   opacity: 0.8;
 }
 
+.search__button_disabled {
+  opacity: 0.3;
+}
+
 @media screen and (max-width: 768px) {
   .search {
     padding: 0 30px;

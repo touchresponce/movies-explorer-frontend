@@ -7,6 +7,7 @@ export default function MoviesCardList({
   filtredMovies,
   handleSaveMovie,
   handleDeleteMovie,
+  savedMovies,
 }) {
   return (
     <section className={`movies ${isLoading ? "movies-loader" : ""}`}>
@@ -20,6 +21,7 @@ export default function MoviesCardList({
             movie={movie}
             handleSaveMovie={handleSaveMovie}
             handleDeleteMovie={handleDeleteMovie}
+            savedMovies={savedMovies}
           />
         ))
       )}

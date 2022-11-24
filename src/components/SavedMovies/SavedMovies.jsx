@@ -27,7 +27,7 @@ export default function SavedMovies({
   useEffect(() => {
     const req = JSON.parse(localStorage.getItem("query-saved"))?.req;
 
-    setFiltredMovies(savedMovies);
+    setFiltredMovies(savedMovies.reverse());
     getFiltred(req || "", isChecked);
     setSearchText(req || "");
   }, [savedMovies]);

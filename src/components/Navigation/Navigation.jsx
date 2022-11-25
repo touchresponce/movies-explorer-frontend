@@ -1,49 +1,58 @@
 import "./Navigation.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import BurgerButton from "../BurgerButton/BurgerButton";
 
-export default function Navigation({ isLogin, isOpen, setIsOpen }) {
+export default function Navigation({ loggedIn, isOpen, setIsOpen }) {
   return (
     <>
-      {isLogin ? (
+      {loggedIn ? (
         <>
-          <nav className="navigation logged display">
+          <nav className='navigation logged display'>
             <div>
-              <Link
-                className="navigation__link navigation__link_type_films"
-                to="/movies"
+              <NavLink
+                // className='navigation__link navigation__link_type_films'
+                className={({ isActive }) =>
+                  isActive
+                    ? "navigation__link navigation__link_type_films navigation__link_active"
+                    : "navigation__link navigation__link_type_films"
+                }
+                to='/movies'
               >
                 Фильмы
-              </Link>
-              <Link
-                className="navigation__link navigation__link_type_save"
-                to="/saved-movies"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "navigation__link navigation__link_type_save navigation__link_active"
+                    : "navigation__link navigation__link_type_save"
+                }
+                to='/saved-movies'
               >
                 Сохранённые фильмы
-              </Link>
+              </NavLink>
             </div>
             <div>
               <Link
-                className="navigation__link navigation__link_type_profile"
-                to="/profile"
+                className='navigation__link navigation__link_type_profile'
+                to='/profile'
               >
                 Аккаунт
-                <div className="navigation__icon" />
+                <div className='navigation__icon' />
               </Link>
             </div>
           </nav>
           <BurgerButton isOpen={isOpen} setIsOpen={setIsOpen} />
         </>
       ) : (
-        <nav className="navigation">
+        <nav className='navigation'>
           <Link
-            className="navigation__link navigation__link_type_registration"
+            className='navigation__link navigation__link_type_registration'
             to={"/signup"}
           >
             Регистрация
           </Link>
           <Link to={"/signin"}>
-            <button className="navigation__button">Войти</button>
+            <button className='navigation__button'>Войти</button>
           </Link>
         </nav>
       )}

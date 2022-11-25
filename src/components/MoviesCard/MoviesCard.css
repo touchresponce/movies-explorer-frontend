@@ -9,7 +9,7 @@
 .movie__title {
   padding: 0;
   margin: 14px 0 0 14px;
-  max-width: 280px;
+  max-width: 250px;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
@@ -21,15 +21,11 @@
 .movie__duration {
   padding: 0;
   margin: 9px 0 14px 14px;
-  max-width: 280px;
+  max-width: 250px;
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;
   color: #8b8b8b;
-}
-
-.movie__image {
-  width: 100%;
 }
 
 .movie__button {
@@ -55,4 +51,26 @@
 
 .movie__button_type_unsave {
   background-image: url("../../images/unsave.svg");
+}
+
+.movie__button_type_delete {
+  background-image: url("../../images//delete.svg");
+}
+
+.movie__image {
+  width: 100%;
+  object-fit: cover;
+  height: 203px;
+}
+
+@media screen and (max-width: 768px) {
+  .movie__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .movie__image {
+    height: 168px;
+  }
 }

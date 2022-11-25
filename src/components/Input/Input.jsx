@@ -5,8 +5,11 @@ export default function Input({
   label,
   type,
   placeholder,
-  defValue,
+  minLength,
   isValid,
+  errors,
+  pattern,
+  onChange,
 }) {
   return (
     <>
@@ -16,17 +19,21 @@ export default function Input({
         </label>
         <input
           className={`input__wrapper ${
-            !isValid ? "input__wrapper_color" : ""
+            errors ? "input__wrapper_color" : ""
           } ${name}__input ${name}__input_type_${type}`}
           id={`${name}-input`}
+          autoComplete="off"
+          required
           type={type}
           name={name}
           placeholder={placeholder}
-          defaultValue={defValue}
+          minLength={minLength}
+          pattern={pattern}
+          onChange={onChange}
         />
       </div>
       <span className={`input__error ${!isValid ? `input__error_active` : ""}`}>
-        Что-то пошло не так...
+        {errors}
       </span>
     </>
   );

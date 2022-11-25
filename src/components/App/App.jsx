@@ -84,6 +84,9 @@ export default function App() {
     setLoggedIn(false);
     localStorage.clear();
     setCurrentUser({});
+    setServerError("");
+    setServerResponce("");
+    setSavedMovies([]);
   }
 
   // редактирование пользователя
@@ -182,7 +185,12 @@ export default function App() {
         console.log(res);
         setSavedMovies([...savedMovies, res]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        if (err === 401) {
+          handleLogout();
+        }
+      });
   }
 
   // удалить фильм из сохраненок

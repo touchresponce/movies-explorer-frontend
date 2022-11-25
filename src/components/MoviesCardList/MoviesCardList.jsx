@@ -1,6 +1,7 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
+import { useLocation } from "react-router-dom";
 
 export default function MoviesCardList({
   isLoading,
@@ -9,6 +10,8 @@ export default function MoviesCardList({
   handleDeleteMovie,
   savedMovies,
 }) {
+  const { pathname } = useLocation();
+
   return (
     <section className={`movies ${isLoading ? "movies-loader" : ""}`}>
       {isLoading ? (

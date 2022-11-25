@@ -1,4 +1,4 @@
-import { useDebugValue, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
@@ -10,38 +10,52 @@ export default function SavedMovies({
   savedMovies,
 }) {
   const [searchText, setSearchText] = useState("");
-  const [filtredMovies, setFiltredMovies] = useState(savedMovies);
+  const [filtredMovies, setFiltredMovies] = useState([]);
   const [isEmpty, setIsEmpty] = useState("");
-  const [isChecked, setIsChecked] = useState(() => {
-    if (JSON.parse(localStorage.getItem("isSavedShort"))?.short) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  const [isChecked, setIsChecked] = useState(false);
+
   // подтягивание сохраненок
   useEffect(() => {
     getSavedMovies();
   }, []);
 
-  useEffect(() => {
-    const req = JSON.parse(localStorage.getItem("query-saved"))?.req;
+  function reverse() {
+    if (!isChecked) {
+      setFiltredMovies(
+        savedMovies
+          ?.filter(
+            (movie) =>
+              movie.nameRU.toLowerCase().includes(searchText?.toLowerCase()) ||
+              movie.nameEN.toLowerCase().includes(searchText?.toLowerCase())
+          )
+          .reverse()
+      );
+    } else {
+      const shorts = savedMovies?.filter((movie) => movie.duration < 40);
+      setFiltredMovies(
+        shorts
+          ?.filter(
+            (short) =>
+              short.nameRU.toLowerCase().includes(searchText?.toLowerCase()) ||
+              short.nameEN.toLowerCase().includes(searchText?.toLowerCase())
+          )
+          .reverse()
+      );
+    }
+  }
 
-    setFiltredMovies(savedMovies.reverse());
-    getFiltred(req || "", isChecked);
-    setSearchText(req || "");
+  useEffect(() => {
+    reverse();
   }, [savedMovies]);
 
   // чекбокс
   useEffect(() => {
     getFiltred(searchText || "", isChecked);
-    saveShort();
+    reverse();
   }, [isChecked]);
 
   useEffect(() => {
-    if (!filtredMovies?.length && !localStorage.getItem("query-saved")) {
-      return;
-    } else if (!filtredMovies?.length) {
+    if (!filtredMovies?.length) {
       setIsEmpty("Ничего не найдено :(");
     } else {
       setIsEmpty("");
@@ -70,28 +84,9 @@ export default function SavedMovies({
     }
   }
 
-  function saveQuery() {
-    localStorage.setItem(
-      "query-saved",
-      JSON.stringify({
-        req: searchText,
-      })
-    );
-  }
-
-  function saveShort() {
-    localStorage.setItem(
-      "isSavedShort",
-      JSON.stringify({
-        short: isChecked,
-      })
-    );
-  }
-
   // сабмит формы поиска
   function handleSubmit(e) {
     e.preventDefault();
-    saveQuery();
     getFiltred(searchText, isChecked);
   }
 

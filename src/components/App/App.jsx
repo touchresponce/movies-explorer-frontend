@@ -180,20 +180,20 @@ export default function App() {
       })
       .then((res) => {
         console.log(res);
-        getSavedMovies();
-        // setSavedMovies([...savedMovies, movie]);
+        setSavedMovies([...savedMovies, res]);
       })
       .catch((err) => console.log(err));
   }
 
   // удалить фильм из сохраненок
-  function handleDeleteMovie(id) {
+  function handleDeleteMovie(idToDelete, itemId) {
     mainApi
-      .deleteMovie(id)
+      .deleteMovie(idToDelete)
       .then((res) => {
         console.log(res);
-        getSavedMovies();
-        setSavedMovies((prev) => prev.filter((item) => item.id !== id));
+        setSavedMovies((prev) =>
+          prev.filter((item) => item.movieId !== itemId)
+        );
       })
       .catch((err) => console.log(err));
   }

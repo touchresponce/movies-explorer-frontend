@@ -11,7 +11,9 @@ export default function MoviesCard({
 }) {
   const { pathname } = useLocation();
 
-  const isSave = savedMovies?.some((state) => state.movieId === id);
+  const isSave = savedMovies?.some(
+    (state) => state.movieId === id || state.id === id
+  );
 
   const movieToDelete = savedMovies?.find((el) => el.movieId === id);
 
@@ -31,7 +33,7 @@ export default function MoviesCard({
           type='button'
           onClick={() => {
             isSave
-              ? handleDeleteMovie(movieToDelete._id)
+              ? handleDeleteMovie(movieToDelete._id, id)
               : handleSaveMovie(movie);
           }}
         />
@@ -40,7 +42,7 @@ export default function MoviesCard({
           className='movie__button movie__button_type_delete'
           type='button'
           onClick={() => {
-            handleDeleteMovie(id);
+            handleDeleteMovie(movie._id, movie.movieId);
           }}
         />
       )}

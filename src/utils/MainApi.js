@@ -73,8 +73,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: "https://bitfilms.touchresponce.nomoredomains.icu",
-  // baseUrl: "http://localhost:3000",
+  // baseUrl: "https://bitfilms.touchresponce.nomoredomains.icu",
+  baseUrl: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
   },

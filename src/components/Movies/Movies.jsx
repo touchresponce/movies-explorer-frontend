@@ -81,9 +81,9 @@ export default function Movies({
   }, [isChecked]);
 
   // подтягивание запроса\отобр фильмов при переходе по страницам
-  useEffect(() => {
-    setSearchText(JSON.parse(localStorage.getItem("query"))?.req);
-  }, []);
+  // useEffect(() => {
+  //   setSearchText(JSON.parse(localStorage.getItem("query"))?.req);
+  // }, []);
   useEffect(() => {
     getFiltred(JSON.parse(localStorage.getItem("query"))?.req, isChecked);
   }, []);
@@ -149,8 +149,8 @@ export default function Movies({
   }
 
   // сабмит формы поиска
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit() {
+    // e.preventDefault();
     await getAllMovies();
     saveQuery();
     getFiltred(searchText, isChecked);

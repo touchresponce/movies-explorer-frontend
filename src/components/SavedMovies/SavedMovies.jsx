@@ -85,8 +85,8 @@ export default function SavedMovies({
   }
 
   // сабмит формы поиска
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
+    // e.preventDefault();
     getFiltred(searchText, isChecked);
   }
 

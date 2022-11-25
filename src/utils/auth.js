@@ -50,8 +50,8 @@ class Auth {
 }
 
 const auth = new Auth({
-  // baseUrl: "https://bitfilms.touchresponce.nomoredomains.icu",
-  baseUrl: "http://localhost:3000",
+  baseUrl: "https://bitfilms.touchresponce.nomoredomains.icu",
+  // baseUrl: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
   },

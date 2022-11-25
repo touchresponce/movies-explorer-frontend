@@ -1,5 +1,5 @@
 import "./Navigation.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import BurgerButton from "../BurgerButton/BurgerButton";
 
 export default function Navigation({ loggedIn, isOpen, setIsOpen }) {
@@ -9,18 +9,27 @@ export default function Navigation({ loggedIn, isOpen, setIsOpen }) {
         <>
           <nav className='navigation logged display'>
             <div>
-              <Link
-                className='navigation__link navigation__link_type_films'
+              <NavLink
+                // className='navigation__link navigation__link_type_films'
+                className={({ isActive }) =>
+                  isActive
+                    ? "navigation__link navigation__link_type_films navigation__link_active"
+                    : "navigation__link navigation__link_type_films"
+                }
                 to='/movies'
               >
                 Фильмы
-              </Link>
-              <Link
-                className='navigation__link navigation__link_type_save'
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "navigation__link navigation__link_type_save navigation__link_active"
+                    : "navigation__link navigation__link_type_save"
+                }
                 to='/saved-movies'
               >
                 Сохранённые фильмы
-              </Link>
+              </NavLink>
             </div>
             <div>
               <Link
